@@ -69,5 +69,15 @@ namespace CorporateMessenger.Client.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] send {
+            get {
+                object obj = ResourceManager.GetObject("send", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace CorporateMessenger.Client
 {
@@ -45,7 +43,7 @@ namespace CorporateMessenger.Client
                 // Логика авторизации
                 if (AuthenticateUser(username, password))
                 {
-                    MessageBox.Show("Вход выполнен!", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+                    OpenMainWindow();
                 }
                 else
                 {
@@ -67,6 +65,13 @@ namespace CorporateMessenger.Client
             string logPath = "login_attempts.log";
             string logEntry = $"{DateTime.Now}: Неудачная попытка входа - {username}";
             File.AppendAllText(logPath, logEntry + Environment.NewLine);
+        }
+
+        private void OpenMainWindow()
+        {
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close(); 
         }
     }
 }

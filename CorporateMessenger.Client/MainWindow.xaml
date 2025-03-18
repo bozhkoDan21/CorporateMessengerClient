@@ -1,0 +1,106 @@
+﻿<Window x:Class="CorporateMessenger.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Corporate Messenger" Height="700" Width="1000"
+        Background="#1E1E2D" Foreground="White"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <!-- Определение колонок -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <!-- Левая панель -->
+            <ColumnDefinition Width="*"/>
+            <!-- Правая панель -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель (список чатов) -->
+        <Grid Background="#252836">
+            <StackPanel>
+                <!-- Поле поиска -->
+                <Grid Margin="10">
+                    <TextBox x:Name="SearchBox"
+                             Background="#33354E"
+                             Foreground="White"
+                             FontSize="16"
+                             Padding="8"
+                             Height="40"
+                             TextChanged="SearchBox_TextChanged"/>
+
+                    <!-- Placeholder -->
+                    <TextBlock x:Name="SearchPlaceholder" 
+                               Text="Поиск..."
+                               Foreground="Gray"
+                               FontSize="16"
+                               VerticalAlignment="Center"
+                               Padding="12,0,0,0"
+                               IsHitTestVisible="False"/>
+                </Grid>
+
+                <!-- Список чатов -->
+                <ListBox x:Name="ChatList" Background="#252836"
+                         Foreground="White" BorderThickness="0"
+                         SelectionChanged="ChatList_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="5">
+                                <Ellipse Width="40" Height="40" Fill="Gray" Margin="5"/>
+                                <TextBlock Text="{Binding ChatName}" FontSize="16"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+
+        <!-- Правая панель (чат) -->
+        <Grid Grid.Column="1" Background="#1E1E2D">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <!-- Верхняя панель -->
+                <RowDefinition Height="*"/>
+                <!-- Сообщения -->
+                <RowDefinition Height="60"/>
+                <!-- Поле ввода -->
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок чата -->
+            <TextBlock x:Name="ChatTitle" Text="Выберите чат"
+                       FontSize="18" FontWeight="Bold"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <!-- Сообщения -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="MessagesPanel" Margin="10"/>
+            </ScrollViewer>
+
+            <!-- Поле ввода -->
+            <Grid Grid.Row="2" Background="#252836" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <!-- Поле ввода -->
+                    <ColumnDefinition Width="60"/>
+                    <!-- Кнопка -->
+                </Grid.ColumnDefinitions>
+
+                <TextBox x:Name="MessageBox"
+                         Grid.Column="0"
+                         Background="#33354E"
+                         Foreground="White"
+                         FontSize="16"
+                         Padding="8"
+                         Height="40"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,10,0"/>
+
+                <Button Grid.Column="1"
+                        Width="50" Height="40"
+                        Background="Transparent"
+                        Click="SendMessage_Click">
+                    <Image Source="pack://application:,,,/Properties/Images/send.png" 
+                           Width="30" Height="30"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
